@@ -1,0 +1,117 @@
+{
+	"SittingRoom": {
+		"Sprite": "SittingRoom.png",
+		"X": 0,
+		"Y": 0,
+		"Width": 7,
+		"Length": 7,
+		"Connections": [
+			{ "X": 7, "Y": 6, "Sprite": "Tile.png", "Room": "Hallway" }
+		],
+		"Tiles": [
+			// Sofa
+			{ "X": 0, "Y": 1, "Height": 1 },
+			{ "X": 0, "Y": 2, "Height": 1 },
+			{ "X": 0, "Y": 3, "Height": 1 }
+		]
+	},
+	"Kitchen": {
+		"Sprite": "Kitchen.png",
+		"X": 0,
+		"Y": 7,
+		"Width": 7,
+		"Length": 5,
+		"Connections": [
+			{ "X": 7, "Y": 9, "Sprite": "Tile.png", "Room": "Hallway" }
+		],
+		"Tiles": [
+			// Kitchen Counter with cooker
+			{ "X": 0, "Y": 7, "Height": 1 },
+			{ "X": 1, "Y": 7, "Height": 1 },
+			{ "X": 2, "Y": 7, "Height": 1 },
+			{ "X": 3, "Y": 7, "Height": 1 },
+			// Fridge
+			{ "X": 4, "Y": 7, "Height": 2 },
+			// Unscalable units
+			{ "X": 6, "Y": 7, "Collision": 1 },
+			{ "X": 5, "Y": 7, "Collision": 1 },
+			// Kitchen Counter
+			{ "X": 0, "Y": 8, "Height": 1 },
+			// Cooker
+			{ "X": 0, "Y": 9, "Height": 1, "Interactable": 1 },
+			// Kitchen Counter
+			{ "X": 0, "Y": 10, "Height": 1 },
+			{ "X": 0, "Y": 11, "Height": 1 },
+			{ "X": 1, "Y": 11, "Height": 1 },
+			{ "X": 2, "Y": 11, "Height": 1 },
+			{ "X": 3, "Y": 11, "Height": 1 },
+			{ "X": 4, "Y": 11, "Height": 1 },
+			{ "X": 5, "Y": 11, "Height": 1 },
+			{ "X": 6, "Y": 11, "Height": 1 }
+		]
+	},
+	"Bedroom1": {
+		"Sprite": "Bedroom1.png",
+		"X": 7,
+		"Y": 0,
+		"Width": 5,
+		"Length": 5,
+		"Connections": [
+			{ "X": 10, "Y": 5, "Sprite": "Tile.png", "Room": "Hallway" }
+		]
+	},
+	"Hallway": {
+		"Sprite": "Hallway.png",
+		"X": 7,
+		"Y": 5,
+		"Width": 7,
+		"Length": 7,
+		"Connections": [
+			{ "X": 6, "Y": 9, "Sprite": "Tile.png", "Room": "Kitchen" },
+			{ "X": 6, "Y": 6, "Sprite": "Tile.png", "Room": "SittingRoom" },
+			{ "X": 10, "Y": 4, "Sprite": "Tile.png", "Room": "Bedroom1" },
+			{ "X": 12, "Y": 4, "Sprite": "Tile.png", "Room": "Bedroom2" },
+			{ "X": 13, "Y": 7, "Sprite": "Tile.png", "Room": "Bathroom" }
+		],
+	},
+	"Bedroom2": {
+		"Sprite": "Bedroom2.png",
+		"X": 12,
+		"Y": 0,
+		"Width": 5,
+		"Length": 5,
+		"Connections": [
+			{ "X": 12, "Y": 5, "Sprite": "Tile.png", "Room": "Hallway" },
+			{ "X": 15, "Y": 5, "Sprite": "Tile.png", "Room": "Bedroom2Closet" }
+		],
+		"Tiles": [
+			// Bed
+			{ "X": 13, "Y": 1, "Height": 1 },
+			{ "X": 13, "Y": 2, "Height": 1 },
+			{ "X": 14, "Y": 1, "Height": 1 },
+			{ "X": 14, "Y": 2, "Height": 1 },
+			{ "X": 14, "Y": 1, "Height": 1 },
+			{ "X": 14, "Y": 2, "Height": 1 }
+		]
+	},
+	"Bedroom2Closet": {
+		"Sprite": "Bedroom2Closet.png",
+		"X": 14,
+		"Y": 5,
+		"Width": 3,
+		"Length": 2,
+		"Connections": [
+			{ "X": 15, "Y": 4, "Sprite": "Tile.png", "Room": "Bedroom2" }
+		]
+	},
+	"Bathroom": {
+		"Sprite": "Bathroom.png",
+		"X": 12,
+		"Y": 7,
+		"Width": 5,
+		"Length": 3,
+		"Connections": [
+			{ "X": 13, "Y": 6, "Sprite": "Tile.png", "Room": "Hallway" }
+		]
+	}
+}

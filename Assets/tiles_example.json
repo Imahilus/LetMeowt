@@ -1,0 +1,29 @@
+{
+  "(0, 0)": {
+    "image": "tile_grass.png",
+    "collision": false,
+    "jumpable": false
+  },
+  "(1, 0)": {
+    "image": "tile_wall.png",
+    "collision": true,
+    "jumpable": false
+  },
+  "(2, 0)": {
+    "image": "tile_platform.png",
+    "collision": false,
+    "jumpable": true
+  },
+  "(0, 1)": {
+    "image": "tile_grass.png"
+  },
+  "(1, 1)": {
+    "collision": true
+  }
+}
+
+
+
+
+
+
