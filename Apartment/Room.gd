@@ -1,4 +1,3 @@
-extends Object
 class_name Room
 
 
@@ -9,7 +8,3 @@ var Width: int
 var Length: int
 var Connections: Array[Connection]
 var Tiles: Array[Tile]
-
-
-func _init() -> void:
-	var i: int = 0

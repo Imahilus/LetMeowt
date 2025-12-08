@@ -11,30 +11,50 @@ func _ready() -> void:
     var content: String = file.get_as_text()
     file.close()
 
-    load("res://Assets/Furniture.png")
-<<<<<<< Updated upstream
-
-    position.x += 700
-    position.y += 200
-=======
-#
-    #position.x += 700
-    #position.y += 200
->>>>>>> Stashed changes
 
     var regex = RegEx.new()
     regex.compile(".*//.*")
     var cleanContent: String = regex.sub(content, "", true)
 
     var json: Dictionary = JSON.parse_string(cleanContent)
-    for roomName in json.keys():
-        var roomData: Dictionary = json[roomName]
+    for roomName in json["Rooms"].keys():
+        if roomName == "Furniture":
+            continue
+        var roomData: Dictionary = json["Rooms"][roomName]
         var newRoom: Room = ParseRoom(roomName, roomData)
         for connectionData in roomData["Connections"]:
             newRoom.Connections.append(ParseConnection(connectionData))
         if roomData.has("Tiles"):
             for tileData in roomData["Tiles"]:
                 newRoom.Tiles.append(ParseTile(tileData))
+
+
+    var furniture_spritesheet:Image = load("res://Assets/Furniture.png")
+
+    for furniture in json["Furniture"].keys():
+        var obj = json["Furniture"][furniture]
+        var sprite_sheet_x = obj.X
+        var sprite_sheet_y = obj.Y
+        var sprite_width = obj.Width
+        var sprite_height = obj.Height
+
+        # we now extract the sprite from the spritesheet
+        var rect = Rect2(sprite_sheet_x, sprite_sheet_y, sprite_width, sprite_height)
+        var img = furniture_spritesheet.get_region(rect)
+
+
+        var sprite = Sprite2D.new()
+        add_child(sprite)
+
+        var render_at_x = obj.RenderOffsetX
+        var render_at_y = obj.RenderOffsetY
+        var render_z_index = obj.ZIndex
+
+        sprite.texture = ImageTexture.create_from_image(img)
+
+        sprite.centered = false
+        sprite.global_position = Vector2(render_at_x, render_at_y)
+        sprite.z_index = render_z_index
 
 
 func ParseRoom(roomName: String, roomData: Dictionary) -> Room:
@@ -56,11 +76,8 @@ func ParseRoom(roomName: String, roomData: Dictionary) -> Room:
     #roomOrigin.position = IsometricUtils.MapTileToScreenCoordinates(newRoom.X, newRoom.Y)
     #add_child(roomOrigin)
 
-<<<<<<< Updated upstream
-    Rooms[roomName] = newRoom
-=======
+
     _rooms[roomName] = newRoom
->>>>>>> Stashed changes
     newRoom.Connections = []
     return newRoom
 
