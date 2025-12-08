@@ -1,10 +1,10 @@
+@tool
 extends Node2D
 
 
 const ROOM_WALL_HEIGHT: int = 70
-var Rooms: Dictionary[String, Room] = {}
+var _rooms: Dictionary[String, Room] = {}
 var _furnitureTexture: Texture2D
-
 
 func _ready() -> void:
     var file: FileAccess = FileAccess.open("res://Assets/Map.json", FileAccess.READ)
@@ -12,9 +12,15 @@ func _ready() -> void:
     file.close()
 
     load("res://Assets/Furniture.png")
+<<<<<<< Updated upstream
 
     position.x += 700
     position.y += 200
+=======
+#
+    #position.x += 700
+    #position.y += 200
+>>>>>>> Stashed changes
 
     var regex = RegEx.new()
     regex.compile(".*//.*")
@@ -50,7 +56,11 @@ func ParseRoom(roomName: String, roomData: Dictionary) -> Room:
     #roomOrigin.position = IsometricUtils.MapTileToScreenCoordinates(newRoom.X, newRoom.Y)
     #add_child(roomOrigin)
 
+<<<<<<< Updated upstream
     Rooms[roomName] = newRoom
+=======
+    _rooms[roomName] = newRoom
+>>>>>>> Stashed changes
     newRoom.Connections = []
     return newRoom
 
