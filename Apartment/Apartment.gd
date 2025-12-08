@@ -50,7 +50,7 @@ func ParseRoom(roomName: String, roomData: Dictionary) -> Room:
 	#roomOrigin.position = IsometricUtils.MapTileToScreenCoordinates(newRoom.X, newRoom.Y)
 	#add_child(roomOrigin)
 	
-	_rooms[roomName] = newRoom
+	Rooms[roomName] = newRoom
 	newRoom.Connections = []
 	return newRoom
 	
