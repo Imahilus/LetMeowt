@@ -1,117 +1,268 @@
 {
-	"SittingRoom": {
-		"Sprite": "SittingRoom.png",
-		"X": 0,
-		"Y": 0,
-		"Width": 7,
-		"Length": 7,
-		"Connections": [
-			{ "X": 7, "Y": 6, "Sprite": "Tile.png", "Room": "Hallway" }
-		],
-		"Tiles": [
-			// Sofa
-			{ "X": 0, "Y": 1, "Height": 1 },
-			{ "X": 0, "Y": 2, "Height": 1 },
-			{ "X": 0, "Y": 3, "Height": 1 }
-		]
+	"Furniture": {
+		"KitchenPress": {
+			"X": 0,
+			"Y": 13,
+			"Width": 96,
+			"Height": 115,
+			"RenderOffsetX": 0,
+			"RenderOffsetY": 83,
+			"ZIndex": 0
+		},
+		"Fridge": {
+			"X": 128,
+			"Y": 30,
+			"Width": 64,
+			"Height": 98,
+			"RenderOffsetX": 0,
+			"RenderOffsetY": 66,
+			"ZIndex": 0
+		},
+		"CounterFridgeSide": {
+			"X": 192,
+			"Y": 31,
+			"Width": 128,
+			"Height": 97,
+			"RenderOffsetX": 0,
+			"RenderOffsetY": 65,
+			"ZIndex": 0
+		},
+		"CounterWithCooker": {
+			"X": 320,
+			"Y": 0,
+			"Width": 192,
+			"Height": 129,
+			"RenderOffsetX": 128,
+			"RenderOffsetY": 97,
+			"ZIndex": 0
+		},
+		"CookerHood": {
+			"X": 512,
+			"Y": 0,
+			"Width": 64,
+			"Height": 100,
+			"RenderOffsetX": 0,
+			"RenderOffsetY": 68,
+			"ZIndex": 1
+		},
+		"CounterBackFacing": {
+			"X": 0,
+			"Y": 159,
+			"Width": 128,
+			"Height": 97,
+			"RenderOffsetX": 0,
+			"RenderOffsetY": 65,
+			"ZIndex": 0
+		},
+		"DiningTable": {
+			"X": 128,
+			"Y": 175,
+			"Width": 96,
+			"Height": 81,
+			"RenderOffsetX": 32,
+			"RenderOffsetY": 49,
+			"ZIndex": 0
+		},
+		"DiningChairFrontFacing": {
+			"X": 256,
+			"Y": 180,
+			"Width": 64,
+			"Height": 76,
+			"RenderOffsetX": 0,
+			"RenderOffsetY": 44,
+			"ZIndex": 0
+		},
+		"DiningChairBackFacing": {
+			"X": 320,
+			"Y": 209,
+			"Width": 64,
+			"Height": 47,
+			"RenderOffsetX": 0,
+			"RenderOffsetY": 15,
+			"ZIndex": 0
+		},
+		"DiningChairBackFacingBack": {
+			"X": 320,
+			"Y": 141,
+			"Width": 64,
+			"Height": 67,
+			"RenderOffsetX": 0,
+			"RenderOffsetY": 35,
+			"ZIndex": 1
+		},
+		"Tele": {
+			"X": 0,
+			"Y": 338,
+			"Width": 96,
+			"Height": 110,
+			"RenderOffsetX": 0,
+			"RenderOffsetY": 78,
+			"ZIndex": 0
+		},
+		"CoffeeTable": {
+			"X": 128,
+			"Y": 367,
+			"Width": 128,
+			"Height": 81,
+			"RenderOffsetX": 64,
+			"RenderOffsetY": 49,
+			"ZIndex": 0
+		},
+		"SideTable": {
+			"X": 256,
+			"Y": 401,
+			"Width": 64,
+			"Height": 47,
+			"RenderOffsetX": 0,
+			"RenderOffsetY": 15,
+			"ZIndex": 0
+		},
+		"Sofa": {
+			"X": 320,
+			"Y": 354,
+			"Width": 128,
+			"Height": 94,
+			"RenderOffsetX": 64,
+			"RenderOffsetY": 62,
+			"ZIndex": 0
+		},
+		"BigPottedPlant": {
+			"X": 448,
+			"Y": 359,
+			"Width": 64,
+			"Height": 89,
+			"RenderOffsetX": 0,
+			"RenderOffsetY": 57,
+			"ZIndex": 0
+		}
 	},
-	"Kitchen": {
-		"Sprite": "Kitchen.png",
-		"X": 0,
-		"Y": 7,
-		"Width": 7,
-		"Length": 5,
-		"Connections": [
-			{ "X": 7, "Y": 9, "Sprite": "Tile.png", "Room": "Hallway" }
-		],
-		"Tiles": [
-			// Kitchen Counter with cooker
-			{ "X": 0, "Y": 7, "Height": 1 },
-			{ "X": 1, "Y": 7, "Height": 1 },
-			{ "X": 2, "Y": 7, "Height": 1 },
-			{ "X": 3, "Y": 7, "Height": 1 },
-			// Fridge
-			{ "X": 4, "Y": 7, "Height": 2 },
-			// Unscalable units
-			{ "X": 6, "Y": 7, "Collision": 1 },
-			{ "X": 5, "Y": 7, "Collision": 1 },
-			// Kitchen Counter
-			{ "X": 0, "Y": 8, "Height": 1 },
-			// Cooker
-			{ "X": 0, "Y": 9, "Height": 1, "Interactable": 1 },
-			// Kitchen Counter
-			{ "X": 0, "Y": 10, "Height": 1 },
-			{ "X": 0, "Y": 11, "Height": 1 },
-			{ "X": 1, "Y": 11, "Height": 1 },
-			{ "X": 2, "Y": 11, "Height": 1 },
-			{ "X": 3, "Y": 11, "Height": 1 },
-			{ "X": 4, "Y": 11, "Height": 1 },
-			{ "X": 5, "Y": 11, "Height": 1 },
-			{ "X": 6, "Y": 11, "Height": 1 }
-		]
-	},
-	"Bedroom1": {
-		"Sprite": "Bedroom1.png",
-		"X": 7,
-		"Y": 0,
-		"Width": 5,
-		"Length": 5,
-		"Connections": [
-			{ "X": 10, "Y": 5, "Sprite": "Tile.png", "Room": "Hallway" }
-		]
-	},
-	"Hallway": {
-		"Sprite": "Hallway.png",
-		"X": 7,
-		"Y": 5,
-		"Width": 7,
-		"Length": 7,
-		"Connections": [
-			{ "X": 6, "Y": 9, "Sprite": "Tile.png", "Room": "Kitchen" },
-			{ "X": 6, "Y": 6, "Sprite": "Tile.png", "Room": "SittingRoom" },
-			{ "X": 10, "Y": 4, "Sprite": "Tile.png", "Room": "Bedroom1" },
-			{ "X": 12, "Y": 4, "Sprite": "Tile.png", "Room": "Bedroom2" },
-			{ "X": 13, "Y": 7, "Sprite": "Tile.png", "Room": "Bathroom" }
-		],
-	},
-	"Bedroom2": {
-		"Sprite": "Bedroom2.png",
-		"X": 12,
-		"Y": 0,
-		"Width": 5,
-		"Length": 5,
-		"Connections": [
-			{ "X": 12, "Y": 5, "Sprite": "Tile.png", "Room": "Hallway" },
-			{ "X": 15, "Y": 5, "Sprite": "Tile.png", "Room": "Bedroom2Closet" }
-		],
-		"Tiles": [
-			// Bed
-			{ "X": 13, "Y": 1, "Height": 1 },
-			{ "X": 13, "Y": 2, "Height": 1 },
-			{ "X": 14, "Y": 1, "Height": 1 },
-			{ "X": 14, "Y": 2, "Height": 1 },
-			{ "X": 14, "Y": 1, "Height": 1 },
-			{ "X": 14, "Y": 2, "Height": 1 }
-		]
-	},
-	"Bedroom2Closet": {
-		"Sprite": "Bedroom2Closet.png",
-		"X": 14,
-		"Y": 5,
-		"Width": 3,
-		"Length": 2,
-		"Connections": [
-			{ "X": 15, "Y": 4, "Sprite": "Tile.png", "Room": "Bedroom2" }
-		]
-	},
-	"Bathroom": {
-		"Sprite": "Bathroom.png",
-		"X": 12,
-		"Y": 7,
-		"Width": 5,
-		"Length": 3,
-		"Connections": [
-			{ "X": 13, "Y": 6, "Sprite": "Tile.png", "Room": "Hallway" }
-		]
+	"Rooms": {
+		"SittingRoom": {
+			"Sprite": "SittingRoom.png",
+			"X": 0,
+			"Y": 0,
+			"Width": 7,
+			"Length": 7,
+			"Connections": [
+				{ "X": 7, "Y": 6, "Sprite": "Tile.png", "Room": "Hallway" }
+			],
+			"Tiles": [
+				// Sofa
+				{ "X": 0, "Y": 1, "Height": 1 },
+				{ "X": 0, "Y": 2, "Height": 1 },
+				{ "X": 0, "Y": 3, "Height": 1, "Sprite": "Sofa" },
+				// Coffee Table
+				{ "X": 2, "Y": 1, "Height": 1 },
+				{ "X": 2, "Y": 2, "Height": 1 },
+				{ "X": 2, "Y": 3, "Height": 1, "Sprite": "CoffeeTable" }
+			]
+		},
+		"Kitchen": {
+			"Sprite": "Kitchen.png",
+			"X": 0,
+			"Y": 7,
+			"Width": 7,
+			"Length": 5,
+			"Connections": [
+				{ "X": 7, "Y": 9, "Sprite": "Tile.png", "Room": "Hallway" }
+			],
+			"Tiles": [
+				// Kitchen Counter with cooker
+				{ "X": 0, "Y": 7, "Height": 2 },
+				{ "X": 1, "Y": 7, "Height": 2 },
+				{ "X": 2, "Y": 7, "Height": 2 },
+				{ "X": 3, "Y": 7, "Height": 2, "Sprite": "CounterWithCooker" },
+				// Fridge
+				{ "X": 4, "Y": 7, "Height": 4, "Sprite": "Fridge" },
+				// Larder Press
+				{ "X": 6, "Y": 7, "Height": 4 },
+				{ "X": 5, "Y": 7, "Height": 4, "Sprite": "KitchenPress" },
+				// Kitchen Counter
+				{ "X": 0, "Y": 8, "Height": 2 },
+				// Cooker
+				{ "X": 0, "Y": 9, "Height": 2, "Interactable": 1 },
+				// Kitchen Counter
+				{ "X": 0, "Y": 10, "Height": 2 },
+				{ "X": 0, "Y": 11, "Height": 2 },
+				{ "X": 1, "Y": 11, "Height": 2 },
+				{ "X": 2, "Y": 11, "Height": 2 },
+				{ "X": 3, "Y": 11, "Height": 2, "Sprite": "CounterBackFacing" },
+				// Kitchen Chairs
+				{ "X": 4, "Y": 10, "Height": 1, "Sprite": "DiningChairFrontFacing" },
+				{ "X": 4, "Y": 11, "Height": 1, "Sprite": "DiningChairFrontFacing" },
+				// Kitchen Table
+				{ "X": 5, "Y": 10, "Height": 2 },
+				{ "X": 5, "Y": 11, "Height": 2, "Sprite": "DiningTable" },
+				// Kitchen Chairs
+				{ "X": 6, "Y": 10, "Height": 1, "Sprite": "DiningChairBackFacing" },
+				{ "X": 6, "Y": 10, "Sprite": "DiningChairBackFacingBack" },
+				{ "X": 6, "Y": 11, "Height": 1, "Sprite": "DiningChairBackFacing" },
+				{ "X": 6, "Y": 11, "Sprite": "DiningChairBackFacingBack" },
+			]
+		},
+		"Bedroom1": {
+			"Sprite": "Bedroom1.png",
+			"X": 7,
+			"Y": 0,
+			"Width": 5,
+			"Length": 5,
+			"Connections": [
+				{ "X": 10, "Y": 5, "Sprite": "Tile.png", "Room": "Hallway" }
+			]
+		},
+		"Hallway": {
+			"Sprite": "Hallway.png",
+			"X": 7,
+			"Y": 5,
+			"Width": 7,
+			"Length": 7,
+			"Connections": [
+				{ "X": 6, "Y": 9, "Sprite": "Tile.png", "Room": "Kitchen" },
+				{ "X": 6, "Y": 6, "Sprite": "Tile.png", "Room": "SittingRoom" },
+				{ "X": 10, "Y": 4, "Sprite": "Tile.png", "Room": "Bedroom1" },
+				{ "X": 12, "Y": 4, "Sprite": "Tile.png", "Room": "Bedroom2" },
+				{ "X": 13, "Y": 7, "Sprite": "Tile.png", "Room": "Bathroom" }
+			],
+		},
+		"Bedroom2": {
+			"Sprite": "Bedroom2.png",
+			"X": 12,
+			"Y": 0,
+			"Width": 5,
+			"Length": 5,
+			"Connections": [
+				{ "X": 12, "Y": 5, "Sprite": "Tile.png", "Room": "Hallway" },
+				{ "X": 15, "Y": 5, "Sprite": "Tile.png", "Room": "Bedroom2Closet" }
+			],
+			"Tiles": [
+				// Bed
+				{ "X": 13, "Y": 1, "Height": 1 },
+				{ "X": 13, "Y": 2, "Height": 1 },
+				{ "X": 14, "Y": 1, "Height": 1 },
+				{ "X": 14, "Y": 2, "Height": 1 },
+				{ "X": 14, "Y": 1, "Height": 1 },
+				{ "X": 14, "Y": 2, "Height": 1 }
+			]
+		},
+		"Bedroom2Closet": {
+			"Sprite": "Bedroom2Closet.png",
+			"X": 14,
+			"Y": 5,
+			"Width": 3,
+			"Length": 2,
+			"Connections": [
+				{ "X": 15, "Y": 4, "Sprite": "Tile.png", "Room": "Bedroom2" }
+			]
+		},
+		"Bathroom": {
+			"Sprite": "Bathroom.png",
+			"X": 12,
+			"Y": 7,
+			"Width": 5,
+			"Length": 3,
+			"Connections": [
+				{ "X": 13, "Y": 6, "Sprite": "Tile.png", "Room": "Hallway" }
+			]
+		}
 	}
 }
