@@ -181,6 +181,7 @@
 				{ "X": 0, "Y": 8, "Height": 2 },
 				// Cooker
 				{ "X": 0, "Y": 9, "Height": 2, "Interactable": 1 },
+				{ "X": 0, "Y": 9, "Sprite": "CookerHood" },
 				// Kitchen Counter
 				{ "X": 0, "Y": 10, "Height": 2 },
 				{ "X": 0, "Y": 11, "Height": 2 },
