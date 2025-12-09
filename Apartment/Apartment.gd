@@ -1,121 +1,127 @@
-@tool
 extends Node2D
 
 
 const ROOM_WALL_HEIGHT: int = 70
-var _rooms: Dictionary[String, Room] = {}
+var Rooms: Dictionary[String, Room] = {}
 var _furnitureTexture: Texture2D
+var FurniturePieces: Dictionary[String, Furniture] = {}
+
+var Rube: Cat
 
 func _ready() -> void:
-    var file: FileAccess = FileAccess.open("res://Assets/Map.json", FileAccess.READ)
-    var content: String = file.get_as_text()
-    file.close()
+	var file: FileAccess = FileAccess.open("res://Assets/Map.json", FileAccess.READ)
+	var content: String = file.get_as_text()
+	file.close()
+
+	var regex = RegEx.new()
+	regex.compile(".*//.*")
+	var cleanContent: String = regex.sub(content, "", true)
+	
+	var json: Dictionary = JSON.parse_string(cleanContent)
+	
+	position.x += 600
+	position.y += 100
+	
+	_furnitureTexture = load("res://Assets/Furniture.png")
+	for furnitureName in json["Furniture"].keys():
+		var furnitureData: Dictionary = json["Furniture"][furnitureName]
+		var newFurniture: Furniture = ParseFurniture(furnitureName, furnitureData)
+	
+	for roomName in json["Rooms"].keys():
+		var roomData: Dictionary = json["Rooms"][roomName]
+		var newRoom: Room = ParseRoom(roomName, roomData)
+		for connectionData in roomData["Connections"]:
+			newRoom.Connections.append(ParseConnection(connectionData))
+		if roomData.has("Tiles"):
+			for tileData in roomData["Tiles"]:
+				newRoom.Tiles.append(ParseTile(tileData))
 
 
-    var regex = RegEx.new()
-    regex.compile(".*//.*")
-    var cleanContent: String = regex.sub(content, "", true)
-
-    var json: Dictionary = JSON.parse_string(cleanContent)
-    for roomName in json["Rooms"].keys():
-        if roomName == "Furniture":
-            continue
-        var roomData: Dictionary = json["Rooms"][roomName]
-        var newRoom: Room = ParseRoom(roomName, roomData)
-        for connectionData in roomData["Connections"]:
-            newRoom.Connections.append(ParseConnection(connectionData))
-        if roomData.has("Tiles"):
-            for tileData in roomData["Tiles"]:
-                newRoom.Tiles.append(ParseTile(tileData))
-
-
-    var furniture_spritesheet:Image = load("res://Assets/Furniture.png")
-
-    for furniture in json["Furniture"].keys():
-        var obj = json["Furniture"][furniture]
-        var sprite_sheet_x = obj.X
-        var sprite_sheet_y = obj.Y
-        var sprite_width = obj.Width
-        var sprite_height = obj.Height
-
-        # we now extract the sprite from the spritesheet
-        var rect = Rect2(sprite_sheet_x, sprite_sheet_y, sprite_width, sprite_height)
-        var img = furniture_spritesheet.get_region(rect)
-
-
-        var sprite = Sprite2D.new()
-        add_child(sprite)
-
-        var render_at_x = obj.RenderOffsetX
-        var render_at_y = obj.RenderOffsetY
-        var render_z_index = obj.ZIndex
-
-        sprite.texture = ImageTexture.create_from_image(img)
-
-        sprite.centered = false
-        sprite.global_position = Vector2(render_at_x, render_at_y)
-        sprite.z_index = render_z_index
+func ParseFurniture(furnitureName: String, furnitureData: Dictionary) -> Furniture:
+	var newFurniture: Furniture = Furniture.new()
+	newFurniture.X = int(furnitureData["X"])
+	newFurniture.Y = int(furnitureData["Y"])
+	newFurniture.Width = int(furnitureData["Width"])
+	newFurniture.Height = int(furnitureData["Height"])
+	newFurniture.RenderOffsetX = int(furnitureData["RenderOffsetX"])
+	newFurniture.RenderOffsetY = int(furnitureData["RenderOffsetY"])
+	newFurniture.ZIndex = int(furnitureData["ZIndex"])
+	FurniturePieces[furnitureName] = newFurniture
+	return newFurniture
 
 
 func ParseRoom(roomName: String, roomData: Dictionary) -> Room:
-    var newRoom: Room = Room.new()
-    newRoom.X = int(roomData["X"])
-    newRoom.Y = int(roomData["Y"])
-    newRoom.Width = int(roomData["Width"])
-    newRoom.Length = int(roomData["Length"])
+	var newRoom: Room = Room.new()
+	newRoom.X = int(roomData["X"])
+	newRoom.Y = int(roomData["Y"])
+	newRoom.Width = int(roomData["Width"])
+	newRoom.Length = int(roomData["Length"])
+	newRoom.Sprite = LoadTexture(roomData["Sprite"])
 
-    newRoom.Sprite = LoadSprite(roomData["Sprite"])
-    #newRoom.Sprite.visible = false
-    newRoom.Sprite.position = IsometricUtils.MapTileToScreenCoordinates(newRoom.X, newRoom.Y)
-    newRoom.Sprite.position.x -= (newRoom.Width - 1) * (IsometricUtils.TileWidth / 2)
-    newRoom.Sprite.position.y -= ROOM_WALL_HEIGHT
-
-    #var roomOrigin: Sprite2D = Sprite2D.new()
-    #roomOrigin.texture = load("res://Assets/Tile.png")
-    #roomOrigin.centered = false
-    #roomOrigin.position = IsometricUtils.MapTileToScreenCoordinates(newRoom.X, newRoom.Y)
-    #add_child(roomOrigin)
-
-
-    _rooms[roomName] = newRoom
-    newRoom.Connections = []
-    return newRoom
+	Rooms[roomName] = newRoom
+	newRoom.Connections = []
+	return newRoom
 
 
 func ParseConnection(connectionData: Dictionary) -> Connection:
-    var newConnection: Connection = Connection.new()
-    newConnection.X = int(connectionData["X"])
-    newConnection.Y = int(connectionData["Y"])
-    newConnection.Sprite = LoadSprite(connectionData["Sprite"])
-    newConnection.Sprite.position = IsometricUtils.MapTileToScreenCoordinates(newConnection.X, newConnection.Y)
-    newConnection.Sprite.visible = false
-    newConnection.Sprite.z_index = 1
-    newConnection.Room = connectionData["Room"]
-    return newConnection
+	var newConnection: Connection = Connection.new()
+	newConnection.X = int(connectionData["X"])
+	newConnection.Y = int(connectionData["Y"])
+	newConnection.Sprite = LoadTexture(connectionData["Sprite"])
+	newConnection.Room = connectionData["Room"]
+	return newConnection
 
 
 func ParseTile(tileData: Dictionary) -> Tile:
-    var newTile: Tile = Tile.new()
-    newTile.X = int(tileData["X"])
-    newTile.Y = int(tileData["Y"])
-    if tileData.has("Height"):
-        newTile.Height = int(tileData["Height"])
-    if tileData.has("Collision"):
-        newTile.Collision = tileData["Collision"] == 1
-    if tileData.has("Jeremy"):
-        newTile.JeremyInteractable = true
-    if tileData.has("Cat"):
-        newTile.CatInteractable = true
-    if tileData.has("FurnitureX"):
-        tileData.Sprite = LoadSprite(tileData["Sprite"])
-        tileData.Sprite.position = IsometricUtils.MapTileToScreenCoordinates(newTile.X, newTile.Y)
-        #tileData.Sprite.visible = false
-    return newTile
+	var newTile: Tile = Tile.new()
+	newTile.X = int(tileData["X"])
+	newTile.Y = int(tileData["Y"])
+	if tileData.has("Height"):
+		newTile.Height = int(tileData["Height"])
+	if tileData.has("Collision"):
+		newTile.Collision = tileData["Collision"] == 1
+	if tileData.has("Jeremy"):
+		newTile.JeremyInteractable = true
+	if tileData.has("Cat"):
+		newTile.CatInteractable = true
+	if tileData.has("Sprite"):
+		newTile.Sprite = tileData["Sprite"]
+	return newTile
 
 
-func LoadSprite(path: String) -> Sprite2D:
-    var sprite: Sprite2D = Sprite2D.new()
-    sprite.texture = load("res://Assets/" + path)
-    sprite.centered = false
-    add_child(sprite)
-    return sprite
+func LoadTexture(path: String) -> Texture2D:
+	print("Loading texture: res://Assets/" + path)
+	return load("res://Assets/" + path)
+
+
+func _process(_deltaInMs: float) -> void:
+	queue_redraw()
+
+
+func _draw() -> void:
+	for x in range(17):
+		for y in range(12):
+			for room: Room in Rooms.values():
+				if(room.X == x && room.Y == y):
+					var roomScreenCoordinates: Vector2 = IsometricUtils.MapTileToScreenCoordinates(x, y)
+					roomScreenCoordinates.x -= (room.Width - 1) * (IsometricUtils.TileWidth / 2)
+					roomScreenCoordinates.y -= ROOM_WALL_HEIGHT
+					draw_texture(room.Sprite, roomScreenCoordinates)
+				RenderTiles(x, y, room, 0)
+				RenderTiles(x, y, room, 0)
+
+
+func RenderTiles(x: int, y: int, room: Room, forZIndex: int) -> void:
+	var screenCoordinates: Vector2 = IsometricUtils.MapTileToScreenCoordinates(x, y)
+	for tile: Tile in room.Tiles:
+		if(tile.X == x && tile.Y == y):
+			if(tile.Sprite != ""):
+				var furniturePiece: Furniture = FurniturePieces[tile.Sprite]
+				if(furniturePiece.ZIndex == forZIndex):
+					var sourceRect: Rect2 = Rect2(furniturePiece.X, furniturePiece.Y, furniturePiece.Width, furniturePiece.Height)
+					var destinationRect: Rect2 = Rect2(screenCoordinates.x - furniturePiece.RenderOffsetX, screenCoordinates.y - furniturePiece.RenderOffsetY, furniturePiece.Width, furniturePiece.Height)
+					draw_texture_rect_region(_furnitureTexture, destinationRect, sourceRect)
+
+
+func RenderEntities(x: int, y: int) -> void:
+	pass

@@ -1,7 +1,7 @@
 class_name Room
 
 
-var Sprite: Sprite2D
+var Sprite: Texture2D
 var X: int
 var Y: int
 var Width: int
